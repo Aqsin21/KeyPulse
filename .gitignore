@@ -1,0 +1,21 @@
+# --- IntelliJ IDEA ---
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# --- Maven / Build Outputs ---
+target/
+.mvn/
+
+# --- macOS ---
+.DS_Store
+
+# --- Environment & Secrets ---
+.env
+*.env
+.env.local
+
+# --- Sensitive Configuration Files ---
+application-local.yml
+**/application-local.yml

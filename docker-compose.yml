@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  postgres-identity:
+    image: postgres:15-alpine
+    container_name: postgres-identity
+    environment:
+      POSTGRES_DB: keypulse_identity
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_identity:/var/lib/postgresql/data
+    networks:
+      - keypulse-net
+
+  postgres-vault:
+    image: postgres:15-alpine
+    container_name: postgres-vault
+    environment:
+      POSTGRES_DB: keypulse_vault
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata_vault:/var/lib/postgresql/data
+    networks:
+      - keypulse-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: keypulse-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - keypulse-net
+
+volumes:
+  pgdata_identity:
+  pgdata_vault:
+
+networks:
+  keypulse-net:
+    driver: bridge
