@@ -52,6 +52,11 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR,
                 "An unexpected error occurred", request);
     }
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidToken(
+            InvalidTokenException ex, HttpServletRequest request) {
+        return buildResponse(HttpStatus.UNAUTHORIZED, ex.getMessage(), request);
+    }
 
     private ResponseEntity<ErrorResponse> buildResponse(
             HttpStatus status, String message, HttpServletRequest request) {
